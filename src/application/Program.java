@@ -32,6 +32,7 @@ public class Program {
 	System.out.print("Enter amount for withdraw: ");
 	double withdraw = sc.nextDouble();
 	account.withdraw(withdraw);
+	System.out.println("New balance: " + String.format("%.2f", account.getBalance()));
 	}
 	catch(AccountException e) {
 		System.out.println(e.getMessage());
@@ -39,9 +40,9 @@ public class Program {
 	catch(InputMismatchException e) {
 		System.out.println("Input Invalid");
 	}
-	 
-	 sc.close();
-
+	catch(RuntimeException e) {
+		System.out.println("Unexpected error");
 	}
-
+	 sc.close();
+	}
 }
