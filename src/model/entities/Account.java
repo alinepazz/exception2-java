@@ -1,5 +1,7 @@
 package model.entities;
 
+import model.exception.AccountException;
+
 public class Account {
 
 	private Integer number;
@@ -50,7 +52,13 @@ public class Account {
 	public void deposit(Double amount) {
 		balance += amount;
 	}
-	public void withdraw(Double amount) {
+	public void withdraw(Double amount) throws AccountException  {
+		if(amount > balance) {
+			throw new AccountException("Withdraw error: Not enough balance");
+		} 
+		else if(amount > withdrawLimit) {
+			throw new AccountException("Withdraw error: The amount exceeds withdraw limit");
+		}
 		balance -= amount;
 	}
 }
